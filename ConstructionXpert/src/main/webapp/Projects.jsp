@@ -15,11 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="logo-nobackground.png">
+    <link rel="icon" type="image/x-icon" href="images/logo-nobackground.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="projects.css">
+    <link rel="stylesheet" href="css/projects.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
             </button>
         </div>
         <div class="p-4">
-            <a href="index.html" class="logo"> <img src="logo-nobackground.png" alt="logo" width="150" height="140"></a>
+            <a href="index.html" class="logo"> <img src="images/logo-nobackground.png" alt="logo" width="150" height="140"></a>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
                     <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
@@ -58,6 +58,44 @@
             </div>
         </div>
     </nav>
+
+
+
+
+    <!-- Button to Open the Modal
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button>-->
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <div id="content" class="p-4 p-md-5 pt-5">
         <div class="container my-5">
