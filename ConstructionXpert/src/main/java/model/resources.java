@@ -1,2 +1,4 @@
-package model;public class resources {
+package model;
+
+public class resources {
 }

@@ -1,2 +1,4 @@
-package model;public class tasks {
+package model;
+
+public class tasks {
 }
