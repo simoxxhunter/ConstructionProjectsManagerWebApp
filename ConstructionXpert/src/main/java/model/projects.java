@@ -8,11 +8,9 @@ public class projects {
     private String date_fin;
     private float budget;
 
-    // Default constructor
     public projects() {
     }
 
-    // Parameterized constructor
     public projects(int id_Proj, String nom_proj, String description, String date_debut, String date_fin, float budget) {
         this.id_Proj = id_Proj;
         this.nom_proj = nom_proj;

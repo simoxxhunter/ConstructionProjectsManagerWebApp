@@ -8,7 +8,6 @@ public class resources {
     private String nom_fournisseur;
     private String num_fournisseur;
 
-    // Default constructor
     public resources() {
     }
 
