@@ -77,12 +77,12 @@
 
             <!-- The Modal -->
             <div class="modal fade" id="myModal<%= projet.getProject_id() %>">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %></h4>
+                            <h4 class="modal-title">Project Details: <%= projet.getProject_name() %></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -91,34 +91,33 @@
                             <form>
                                 <div class="form-group">
                                     <label>Project ID</label>
-                                    <input type="text" class="form-control"  value="<%= projet.getProject_id() %>">
+                                    <input type="text" class="form-control" value="<%= projet.getProject_id() %>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label >Project Name</label>
-                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>">
+                                    <label>Project Name</label>
+                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label >Start Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>">
+                                    <label>Start Date</label>
+                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label >End Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>">
+                                    <label>End Date</label>
+                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label >Description</label>
-                                    <textarea class="form-control" ><%= projet.getDescription() %></textarea>
+                                    <label>Description</label>
+                                    <div class="" style="color: #495057 ; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: .25rem;background-clip: padding-box;" ><%= projet.getDescription() %></div>
                                 </div>
                                 <div class="form-group">
-                                    <label >Budget</label>
-                                    <input type="text" class="form-control" value="<%= projet.getBudget() %>">
+                                    <label>Budget</label>
+                                    <input type="text" class="form-control" value="<%= projet.getBudget() %>" readonly>
                                 </div>
                             </form>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
 
