@@ -1,39 +1,36 @@
 package model;
 
 public class projects {
-    private int id_Proj;
-    private String nom_proj;
+    private int project_id;
+    private String project_name;
     private String description;
-    private String date_debut;
-    private String date_fin;
+    private String start_date;
+    private String end_date;
     private float budget;
 
-    public projects() {
-    }
-
-    public projects(int id_Proj, String nom_proj, String description, String date_debut, String date_fin, float budget) {
-        this.id_Proj = id_Proj;
-        this.nom_proj = nom_proj;
+    public projects(int project_id, String project_name, String description, String start_date, String end_date, float budget) {
+        this.project_id = project_id;
+        this.project_name = project_name;
         this.description = description;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
+        this.start_date = start_date;
+        this.end_date = end_date;
         this.budget = budget;
     }
 
-    public int getId_Proj() {
-        return id_Proj;
+    public int getProject_id() {
+        return project_id;
     }
 
-    public void setId_Proj(int id_Proj) {
-        this.id_Proj = id_Proj;
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
     }
 
-    public String getNom_proj() {
-        return nom_proj;
+    public String getProject_name() {
+        return project_name;
     }
 
-    public void setNom_proj(String nom_proj) {
-        this.nom_proj = nom_proj;
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
     }
 
     public String getDescription() {
@@ -44,20 +41,20 @@ public class projects {
         this.description = description;
     }
 
-    public String getDate_debut() {
-        return date_debut;
+    public String getStart_date() {
+        return start_date;
     }
 
-    public void setDate_debut(String date_debut) {
-        this.date_debut = date_debut;
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
     }
 
-    public String getDate_fin() {
-        return date_fin;
+    public String getEnd_date() {
+        return end_date;
     }
 
-    public void setDate_fin(String date_fin) {
-        this.date_fin = date_fin;
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
     public float getBudget() {
@@ -70,12 +67,12 @@ public class projects {
 
     @Override
     public String toString() {
-        return "Projects{" +
-                "id_Proj=" + id_Proj +
-                ", nom_proj='" + nom_proj + '\'' +
+        return "projects{" +
+                "project_id=" + project_id +
+                ", project_name='" + project_name + '\'' +
                 ", description='" + description + '\'' +
-                ", date_debut='" + date_debut + '\'' +
-                ", date_fin='" + date_fin + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
                 ", budget=" + budget +
                 '}';
     }
