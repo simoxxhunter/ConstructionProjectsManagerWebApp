@@ -69,13 +69,66 @@
             <div class="text-center mb-5">
                 <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
             </div>
+            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; display: flex; align-items: center; justify-content: center; height: 45px; width: 230px;"> Add A New Project</button>
             <%
                 List<projects> listProjet = (List<projects>) request.getAttribute("showP");
                 if (listProjet != null && !listProjet.isEmpty()) {
                     for (projects projet : listProjet) {
             %>
 
-            <!-- The Modal -->
+            <!-- Editing Modal -->
+            <div class="modal fade" id="EditingModal<%= projet.getProject_id() %>">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %></h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label>Project ID</label>
+                                    <input type="text" class="form-control" value="<%= projet.getProject_id() %>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project Name</label>
+                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control"><%= projet.getDescription() %></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Budget</label>
+                                    <input type="text" class="form-control" value="<%= projet.getBudget() %>">
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- EDITING Modal end -->
+
+            <!-- Affichage Modal -->
             <div class="modal fade" id="myModal<%= projet.getProject_id() %>">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -124,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal end -->
+            <!-- Affichage Modal end -->
 
             <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
                 <div class="text-center text-uppercase">
@@ -156,7 +209,10 @@
                         View
                     </a><br>
                     <a href="#" class="btn text-white px-5 py-3 main-btn"
-                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Edit</a><br>
+                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;"
+                       data-toggle="modal" data-target="#EditingModal<%= projet.getProject_id() %>">
+                        Edit
+                    </a><br>
                     <a href="#" class="btn text-white px-5 py-3 main-btn"
                        style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Delete</a>
                 </div>
