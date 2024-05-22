@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="model.projects" %>
 <%@ page import="Dao.ImpProjects" %>
 <%@ page import="java.util.List" %>
@@ -27,132 +28,136 @@
 
 <body>
 <div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar">
-        <div class="custom-menu">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
-        </div>
-        <div class="p-4">
-            <a href="index.html" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150" height="140"></a>
-            <ul class="list-unstyled components mb-5">
-                <li class="active">
-                    <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
-                </li>
-                <li>
-                    <a href="Projects.html"><span class="fa fa-briefcase mr-3"></span> Projects</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-cogs mr-3"></span> Resources</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign-out</a>
-                </li>
-            </ul>
-            <div class="footer">
-                <p>
-                    Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script><br> ConstructionXpert Services <i class="icon-heart" aria-hidden="true"></i>
-                </p>
-            </div>
-        </div>
-    </nav>
-
-    <div id="content" class="p-4 p-md-5 pt-5">
-        <div class="container my-5">
-            <div class="text-center mb-5">
-                <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
-            </div>
-
-            <%
-                ImpProjects impProjects = new ImpProjects();
-                List<projects> projectsList = impProjects.getAvailableProjects();
-                if (projectsList != null && !projectsList.isEmpty()) {
-                    for (projects project : projectsList) {git status
-
-            %>
-            <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
-                <div class="text-center text-uppercase">
-                    <h1 class="my-2 font-weight-bold"><%= project.getProject_name() %></h1>
-                </div>
-                <div class="text-center text-uppercase">
-                    <span class="my-2 font-weight-bold">Start date</span><br><br>
-                    <small class="d-block my-3 text-secondary"><%= project.getStart_date() %></small>
-                </div>
-                <div class="text-center text-uppercase">
-                    <span class="my-2 font-weight-bold">End date</span><br><br>
-                    <small class="d-block my-3 text-secondary"><%= project.getEnd_date() %></small>
-                </div>
-                <div class="text-center text-uppercase">
-                    <span class="my-2 font-weight-bold">Description</span><br><br>
-                    <small class="d-block my-3 text-secondary" style="display:inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 23ch;">
-                        <%= project.getDescription() %>
-                    </small>
-                </div>
-                <div class="text-center text-uppercase">
-                    <span class="my-2 font-weight-bold">Budget</span><br><br>
-                    <small class="d-block my-3 text-secondary font-weight-bold"><%= project.getBudget() %></small>
-                </div>
-
-                <div class="text-center">
-                    <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;" data-toggle="modal" data-target="#myModal">
-                        View
-                    </a><br>
-                    <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Edit</a><br>
-                    <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Delete</a>
-                </div>
-            </div>
-            <%
-                }
-            } else {
-            %>
-            <div class="text-center">
-                <h2>No projects available</h2>
-            </div>
-            <%
-                }
-            %>
-
+<nav id="sidebar">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <a href="index.html" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150"
+                                               height="140"></a>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
+            </li>
+            <li>
+                <a href="Projects.html"><span class="fa fa-briefcase mr-3"></span> Projects</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-cogs mr-3"></span> Resources</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign-out</a>
+            </li>
+        </ul>
+        <div class="footer">
+            <p>
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script>
+                <br> ConstructionXpert Services <i class="icon-heart" aria-hidden="true"></i>
+            </p>
         </div>
     </div>
-</div>
+</nav>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
+<div id="content" class="p-4 p-md-5 pt-5">
+<div class="container my-5">
+<div class="text-center mb-5">
+    <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
+</div>
+    <%
+        List<projects> listProjet = (List<projects>) request.getAttribute("showP");
+        if (listProjet != null && !listProjet.isEmpty()) {
+            for (projects projet : listProjet) {
+    %>
+    <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
+        <div class="text-center text-uppercase">
+            <h1 class="my-2 font-weight-bold"> <%= projet.getProject_name() %></h1>
+        </div>
+        <div class="text-center text-uppercase">
+            <span class="my-2 font-weight-bold">Start date</span><br><br>
+            <small class="d-block my-3 text-secondary">  <%= projet.getStart_date() %></small>
+        </div>
+        <div class="text-center text-uppercase">
+            <span class="my-2 font-weight-bold">End date</span><br><br>
+            <small class="d-block my-3 text-secondary">  <%= projet.getEnd_date() %></small>
+        </div>
+        <div class="text-center text-uppercase">
+            <span class="my-2 font-weight-bold">Description</span><br><br>
+            <small class="d-block my-3 text-secondary" style="display:inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 23ch;">
+                <%= projet.getDescription() %>
+            </small>
+        </div>
+        <div class="text-center text-uppercase">
+            <span class="my-2 font-weight-bold">Budget</span><br><br>
+            <small class="d-block my-3 text-secondary font-weight-bold"> <%= projet.getBudget() %></small>
+        </div>
+        <div class="text-center">
+            <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;" data-toggle="modal" data-target="#myModal">
+                View
+            </a><br>
+            <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Edit</a><br>
+            <a href="#" class="btn text-white px-5 py-3 main-btn" style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Delete</a>
+        </div>
+    </div>
+    <%
+        }
+    } else {
+    %>
+    <div class="text-center">
+        <h2>No projects available</h2>
+    </div>
+    <%
+        }
+    %>
+
+
+    <div class="text-center">
+    <h2>No projects available</h2>
+    </div>
+
+
+    </div>
+    </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
     <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                Modal body..
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
+    <!-- Modal Header -->
+    <div class="modal-header">
+    <h4 class="modal-title">Modal Heading</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
-</body>
+    <!-- Modal body -->
+    <div class="modal-body">
+    Modal body..
+    </div>
 
-</html>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    </body>
+
+    </html>

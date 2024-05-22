@@ -1,30 +1,36 @@
 package model;
 
 public class resources {
-    private int id_Ress;
-    private String nom_Ress;
+    private int resource_id;
+    private String resource_name;
     private String type;
-    private float quantité;
-    private String nom_fournisseur;
-    private String num_fournisseur;
+    private float quantity;
+    private String supplier_name;
+    private String supplier_phone;
 
-    public resources() {
+    public resources(int resource_id, String resource_name, String type, float quantity, String supplier_name, String supplier_phone) {
+        this.resource_id = resource_id;
+        this.resource_name = resource_name;
+        this.type = type;
+        this.quantity = quantity;
+        this.supplier_name = supplier_name;
+        this.supplier_phone = supplier_phone;
     }
 
-    public int getId_Ress() {
-        return id_Ress;
+    public int getResource_id() {
+        return resource_id;
     }
 
-    public void setId_Ress(int id_Ress) {
-        this.id_Ress = id_Ress;
+    public void setResource_id(int resource_id) {
+        this.resource_id = resource_id;
     }
 
-    public String getNom_Ress() {
-        return nom_Ress;
+    public String getResource_name() {
+        return resource_name;
     }
 
-    public void setNom_Ress(String nom_Ress) {
-        this.nom_Ress = nom_Ress;
+    public void setResource_name(String resource_name) {
+        this.resource_name = resource_name;
     }
 
     public String getType() {
@@ -35,39 +41,39 @@ public class resources {
         this.type = type;
     }
 
-    public float getQuantité() {
-        return quantité;
+    public float getQuantity() {
+        return quantity;
     }
 
-    public void setQuantité(float quantité) {
-        this.quantité = quantité;
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
     }
 
-    public String getNom_fournisseur() {
-        return nom_fournisseur;
+    public String getSupplier_name() {
+        return supplier_name;
     }
 
-    public void setNom_fournisseur(String nom_fournisseur) {
-        this.nom_fournisseur = nom_fournisseur;
+    public void setSupplier_name(String supplier_name) {
+        this.supplier_name = supplier_name;
     }
 
-    public String getNum_fournisseur() {
-        return num_fournisseur;
+    public String getSupplier_phone() {
+        return supplier_phone;
     }
 
-    public void setNum_fournisseur(String num_fournisseur) {
-        this.num_fournisseur = num_fournisseur;
+    public void setSupplier_phone(String supplier_phone) {
+        this.supplier_phone = supplier_phone;
     }
 
     @Override
     public String toString() {
         return "resources{" +
-                "id_Ress=" + id_Ress +
-                ", nom_Ress='" + nom_Ress + '\'' +
+                "resource_id=" + resource_id +
+                ", resource_name='" + resource_name + '\'' +
                 ", type='" + type + '\'' +
-                ", quantité=" + quantité +
-                ", nom_fournisseur='" + nom_fournisseur + '\'' +
-                ", num_fournisseur='" + num_fournisseur + '\'' +
+                ", quantity=" + quantity +
+                ", supplier_name='" + supplier_name + '\'' +
+                ", supplier_phone='" + supplier_phone + '\'' +
                 '}';
     }
 }
