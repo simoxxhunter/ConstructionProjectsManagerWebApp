@@ -71,8 +71,54 @@
             <div class="text-center mb-5">
                 <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
             </div>
-            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; "> Add A New Project
+            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; " data-toggle="modal" data-target="#addProjectModal"> Add A New Project
             </button>
+
+            <!-- Add Project Modal Start -->
+            <div class="modal fade" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addProjectModalLabel">Add New Project</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addProjectForm" method="post" action="AddProjectServlet">
+                                <div class="form-group">
+                                    <label for="projectName">Project Name</label>
+                                    <input type="text" class="form-control" id="projectName" name="projectName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="budget">Budget</label>
+                                    <input type="number" class="form-control" id="budget" name="budget" required>
+                                </div>
+
+
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Add Project</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
             <%
                 List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
                 projectList.sort((p1, p2) -> Integer.compare(p1.getProject_id(), p2.getProject_id()));
@@ -80,6 +126,8 @@
                     for (projects projet : projectList) {
 
             %>
+            <!-- Add A Project Modal End -->
+
 
             <!-- Editing Modal -->
             <div class="modal fade" id="EditingModal<%= projet.getProject_id() %>">
@@ -94,18 +142,18 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <form id="editForm<%= projet.getProject_id() %>" action="EditProject" method="post">
-                                <input type="hidden" name="project_id" value="<%= projet.getProject_id() %>">
+                                <input type="hidden" name="project_id" value="<%= projet.getProject_id() %>" >
                                 <div class="form-group">
                                     <label>Project Name</label>
-                                    <input type="text" class="form-control" name="project_name" value="<%= projet.getProject_name() %>">
+                                    <input type="text" class="form-control" name="project_name" value="<%= projet.getProject_name() %>" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                    <input type="date" class="form-control" name="start_date" value="<%= projet.getStart_date() %>">
+                                    <input type="date" class="form-control" name="start_date" value="<%= projet.getStart_date() %>" required>
                                 </div>
                                 <div class="form-group">
                                     <label>End Date</label>
-                                    <input type="date" class="form-control" name="end_date" value="<%= projet.getEnd_date() %>">
+                                    <input type="date" class="form-control" name="end_date" value="<%= projet.getEnd_date() %>" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
