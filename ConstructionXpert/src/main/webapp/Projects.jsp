@@ -37,7 +37,8 @@
             </button>
         </div>
         <div class="p-4">
-            <a href="index.html" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150" height="140"></a>
+            <a href="index.html" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150"
+                                                   height="140"></a>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
                     <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
@@ -70,7 +71,8 @@
             <div class="text-center mb-5">
                 <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
             </div>
-            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; "> Add A New Project</button>
+            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; "> Add A New Project
+            </button>
             <%
                 List<projects> listProjet = (List<projects>) request.getAttribute("showProjects");
                 if (listProjet != null && !listProjet.isEmpty()) {
@@ -84,7 +86,8 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %></h4>
+                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %>
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -133,7 +136,8 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Project Details: <%= projet.getProject_name() %></h4>
+                            <h4 class="modal-title">Project Details: <%= projet.getProject_name() %>
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -142,23 +146,29 @@
                             <form>
                                 <div class="form-group">
                                     <label>Project ID</label>
-                                    <input type="text" class="form-control" value="<%= projet.getProject_id() %>" readonly>
+                                    <input type="text" class="form-control" value="<%= projet.getProject_id() %>"
+                                           readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Project Name</label>
-                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>" readonly>
+                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>"
+                                           readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>" readonly>
+                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>"
+                                           readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>End Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>" readonly>
+                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>"
+                                           readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <div class="" style="color: #495057 ; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: .25rem;background-clip: padding-box;" ><%= projet.getDescription() %></div>
+                                    <div class=""
+                                         style="color: #495057 ; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: .25rem;background-clip: padding-box;"><%= projet.getDescription() %>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Budget</label>
@@ -179,15 +189,18 @@
 
             <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
                 <div class="text-center text-uppercase">
-                    <h1 class="my-2 font-weight-bold"><%= projet.getProject_name() %></h1>
+                    <h1 class="my-2 font-weight-bold"><%= projet.getProject_name() %>
+                    </h1>
                 </div>
                 <div class="text-center text-uppercase">
                     <span class="my-2 font-weight-bold">Start date</span><br><br>
-                    <small class="d-block my-3 text-secondary"><%= projet.getStart_date() %></small>
+                    <small class="d-block my-3 text-secondary"><%= projet.getStart_date() %>
+                    </small>
                 </div>
                 <div class="text-center text-uppercase">
                     <span class="my-2 font-weight-bold">End date</span><br><br>
-                    <small class="d-block my-3 text-secondary"><%= projet.getEnd_date() %></small>
+                    <small class="d-block my-3 text-secondary"><%= projet.getEnd_date() %>
+                    </small>
                 </div>
                 <div class="text-center text-uppercase">
                     <span class="my-2 font-weight-bold">Description</span><br><br>
@@ -198,7 +211,8 @@
                 </div>
                 <div class="text-center text-uppercase">
                     <span class="my-2 font-weight-bold">Budget</span><br><br>
-                    <small class="d-block my-3 text-secondary font-weight-bold"><%= projet.getBudget() %></small>
+                    <small class="d-block my-3 text-secondary font-weight-bold"><%= projet.getBudget() %>
+                    </small>
                 </div>
                 <div class="text-center">
                     <a href="#" class="btn text-white px-5 py-3 main-btn"
@@ -213,7 +227,8 @@
                     </a><br>
                     <a href="DeleteProject?project_id=<%= projet.getProject_id() %>"
                        class="btn text-white px-5 py-3 main-btn"
-                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: red;" onclick="alertmsg()">
+                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: red;"
+                       onclick="return deleteConfirmation();">
                         Delete
                     </a>
                 </div>
@@ -244,8 +259,14 @@
 
 <script type="text/javascript">
     function alertmsg() {
-        alert(" project number "+ <!-- <%= projet.getProject_id() %> -->+ "Deleted Sccesfully");
+        alert("Deleted Sccesfully");
 
+    }
+    function deleteConfirmation() {
+        if (confirm("Do You Really Want To Delete This Project?")) {
+            alertMsg();
+        } else {
+        }
     }
 </script>
 
