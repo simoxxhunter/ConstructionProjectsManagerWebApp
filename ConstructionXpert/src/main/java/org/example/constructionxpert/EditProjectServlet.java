@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class EditProjectServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/ProjectsServlet").forward(request, response);
+        request.getRequestDispatcher("/Projects.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,8 +37,7 @@ public class EditProjectServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException("Error editing project", e);
         }
-        request.getRequestDispatcher("/ProjectsServlet").forward(request, response);
-    }
+        response.sendRedirect("ProjectsServlet");    }
 
 
 }
