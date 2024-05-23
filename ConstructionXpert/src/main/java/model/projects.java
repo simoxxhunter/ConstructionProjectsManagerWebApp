@@ -17,6 +17,14 @@ public class projects {
         this.budget = budget;
     }
 
+    public projects(String project_name, String description, String start_date, String end_date, float budget) {
+        this.project_name = project_name;
+        this.description = description;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.budget = budget;
+    }
+
     public int getProject_id() {
         return project_id;
     }

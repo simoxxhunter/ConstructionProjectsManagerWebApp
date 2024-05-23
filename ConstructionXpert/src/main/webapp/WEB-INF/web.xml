@@ -13,7 +13,6 @@
         <url-pattern>/ProjectsServlet</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>DeleteProject</servlet-name>
         <servlet-class>org.example.constructionxpert.DeleteProjectServlet</servlet-class>
@@ -24,7 +23,14 @@
     </servlet-mapping>
 
 
-
+    <servlet>
+        <servlet-name>EditProject</servlet-name>
+        <servlet-class>org.example.constructionxpert.EditProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProject</servlet-name>
+        <url-pattern>/EditProject</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

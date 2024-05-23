@@ -37,14 +37,14 @@
             </button>
         </div>
         <div class="p-4">
-            <a href="index.html" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150"
+            <a href="ProjectsServlet" class="logo"><img src="images/logo-nobackground.png" alt="logo" width="150"
                                                    height="140"></a>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
                     <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
                 </li>
                 <li>
-                    <a href="Projects.html"><span class="fa fa-briefcase mr-3"></span> Projects</a>
+                    <a href="ProjectsServlet"><span class="fa fa-briefcase mr-3"></span> Projects</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
@@ -74,56 +74,54 @@
             <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; "> Add A New Project
             </button>
             <%
-                List<projects> listProjet = (List<projects>) request.getAttribute("showProjects");
-                if (listProjet != null && !listProjet.isEmpty()) {
-                    for (projects projet : listProjet) {
+                List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
+                projectList.sort((p1, p2) -> Integer.compare(p1.getProject_id(), p2.getProject_id()));
+                if (projectList != null && !projectList.isEmpty()) {
+                    for (projects projet : projectList) {
+
             %>
 
             <!-- Editing Modal -->
             <div class="modal fade" id="EditingModal<%= projet.getProject_id() %>">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %>
-                            </h4>
+                            <h4 class="modal-title">Edit Project: <%= projet.getProject_name() %></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form>
-
+                            <form id="editForm<%= projet.getProject_id() %>" action="EditProject" method="post">
+                                <input type="hidden" name="project_id" value="<%= projet.getProject_id() %>">
                                 <div class="form-group">
                                     <label>Project Name</label>
-                                    <input type="text" class="form-control" value="<%= projet.getProject_name() %>">
+                                    <input type="text" class="form-control" name="project_name" value="<%= projet.getProject_name() %>">
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getStart_date() %>">
+                                    <input type="date" class="form-control" name="start_date" value="<%= projet.getStart_date() %>">
                                 </div>
                                 <div class="form-group">
                                     <label>End Date</label>
-                                    <input type="date" class="form-control" value="<%= projet.getEnd_date() %>">
+                                    <input type="date" class="form-control" name="end_date" value="<%= projet.getEnd_date() %>">
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea class="form-control"><%= projet.getDescription() %></textarea>
+                                    <textarea class="form-control" name="description"><%= projet.getDescription() %></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Budget</label>
-                                    <input type="text" class="form-control" value="<%= projet.getBudget() %>">
+                                    <input type="number" class="form-control" name="budget" value="<%= projet.getBudget() %>">
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" onclick="confirmEdit(<%= projet.getProject_id() %>)">Save Edit</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
                         </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Save Edit</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -220,8 +218,7 @@
                        data-toggle="modal" data-target="#myModal<%= projet.getProject_id() %>">
                         View
                     </a><br>
-                    <a href="#" class="btn text-white px-5 py-3 main-btn"
-                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: #17a2b8"
+                    <a  class="btn text-white px-5 py-3 main-btn" ;  style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: #17a2b8"
                        data-toggle="modal" data-target="#EditingModal<%= projet.getProject_id() %>">
                         Edit
                     </a><br>
@@ -268,6 +265,11 @@
             return true;
         } else {
             return false;
+        }
+    }
+    function confirmEdit(projectId) {
+        if (confirm("Do you really want to save these changes?")) {
+            document.getElementById('editForm' + projectId).submit();
         }
     }
 </script>
