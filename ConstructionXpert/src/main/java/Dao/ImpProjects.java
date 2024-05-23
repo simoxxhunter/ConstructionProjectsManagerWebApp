@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.projects;
 
 public class ImpProjects {
+
     public List<projects> getAvailableProjects() throws SQLException {
         List<projects> projectsList = new ArrayList<>();
         String sql = "SELECT * FROM projects";

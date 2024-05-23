@@ -10,6 +10,7 @@
 <%@ page import="model.projects" %>
 <%@ page import="Dao.ImpProjects" %>
 <%@ page import="java.util.List" %>
+
 <!doctype html>
 <html lang="en">
 
@@ -69,9 +70,9 @@
             <div class="text-center mb-5">
                 <h1 class="text-capitalize font-weight-bold">Ongoing <span class="headline">Projects</span></h1>
             </div>
-            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; display: flex; align-items: center; justify-content: center; height: 45px; width: 230px;"> Add A New Project</button>
+            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; "> Add A New Project</button>
             <%
-                List<projects> listProjet = (List<projects>) request.getAttribute("showP");
+                List<projects> listProjet = (List<projects>) request.getAttribute("showProjects");
                 if (listProjet != null && !listProjet.isEmpty()) {
                     for (projects projet : listProjet) {
             %>
@@ -90,10 +91,7 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <form>
-                                <div class="form-group">
-                                    <label>Project ID</label>
-                                    <input type="text" class="form-control" value="<%= projet.getProject_id() %>" readonly>
-                                </div>
+
                                 <div class="form-group">
                                     <label>Project Name</label>
                                     <input type="text" class="form-control" value="<%= projet.getProject_name() %>">
@@ -209,12 +207,15 @@
                         View
                     </a><br>
                     <a href="#" class="btn text-white px-5 py-3 main-btn"
-                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;"
+                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: #17a2b8"
                        data-toggle="modal" data-target="#EditingModal<%= projet.getProject_id() %>">
                         Edit
                     </a><br>
-                    <a href="#" class="btn text-white px-5 py-3 main-btn"
-                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px;">Delete</a>
+                    <a href="DeleteProject?project_id=<%= projet.getProject_id() %>"
+                       class="btn text-white px-5 py-3 main-btn"
+                       style="display: flex; align-items: center; justify-content: center; height: 35px; width: 130px; background-color: red;" onclick="alertmsg()">
+                        Delete
+                    </a>
                 </div>
             </div>
             <%
@@ -240,5 +241,12 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 </body>
+
+<script type="text/javascript">
+    function alertmsg() {
+        alert(" project number "+ <!-- <%= projet.getProject_id() %> -->+ "Deleted Sccesfully");
+
+    }
+</script>
 
 </html>
