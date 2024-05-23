@@ -265,7 +265,9 @@
     function deleteConfirmation() {
         if (confirm("Do You Really Want To Delete This Project?")) {
             alertMsg();
+            return true;
         } else {
+            return false;
         }
     }
 </script>
