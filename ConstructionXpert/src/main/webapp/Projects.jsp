@@ -60,7 +60,7 @@
                 <p>
                     Copyright &copy;
                     <script>document.write(new Date().getFullYear());</script>
-                    <br> ConstructionXpert Services <i class="icon-heart" aria-hidden="true"></i>
+                    <br> ConstructionXpert Services <i class="fa fa-heart" aria-hidden="true"></i>
                 </p>
             </div>
         </div>
@@ -118,10 +118,9 @@
             <!-- Add Project Modal End -->
 
 
-
             <%
                 List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
-                projectList.sort((p1, p2) -> Integer.compare(p1.getProject_id(), p2.getProject_id()));
+                projectList.sort((I1, I2) -> Integer.compare(I1.getProject_id(), I2.getProject_id()));
                 if (projectList != null && !projectList.isEmpty()) {
                     for (projects projet : projectList) {
 
