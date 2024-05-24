@@ -151,7 +151,62 @@
         </div>
     </div>
 </div>
+<!---edit task modal end--->
 
+
+
+
+ <!-- add a task modal start-->
+ <div class="modal fade " id="AddTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="AddTaskModalLabel">Edit Task</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <form id="AddTaskForm">
+                     <div class="form-group">
+                         <label for="AddTaskName">Task Name</label>
+                         <input type="text" class="form-control form-control-outline" id="AddTaskName">
+                     </div>
+                     <div class="form-group">
+                         <label for="editTaskDescription">Task Description</label>
+                         <textarea class="form-control form-control-outline" id="AddTaskDescription" rows="3"></textarea>
+                     </div>
+                     <div class="form-group">
+                         <label for="editStartDate">Start Date</label>
+                         <input type="date" class="form-control form-control-outline" id="AddStartDate">
+                     </div>
+                     <div class="form-group">
+                         <label for="editEndDate">End Date</label>
+                         <input type="date" class="form-control form-control-outline" id="AddEndDate">
+                     </div>
+                     <div class="form-group">
+                         <label for="editStatus">Status</label>
+                         <select class="form-control form-control-outline" id="AddStatus">
+                             <option value="To Do">To Do</option>
+                             <option value="Doing">Doing</option>
+                             <option value="Done">Done</option>
+                         </select>
+                     </div>
+                     <div class="form-group">
+                         <label for="editRequiredResources">Required Resources</label>
+                         <textarea class="form-control form-control-outline" id="AddRequiredResources" rows="3"></textarea>
+                     </div>
+                 </form>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-primary">Save changes</button>
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!--- add task modal end  --->
 
 
 
@@ -212,7 +267,7 @@
 
             <h3 class="mt-5 mb-4">Tasks</h3>
 
-            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; ">Add Task</button>
+            <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; " data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
 
             <div id="kanban-board" class="kanban-board">
                 <div class="kanban-column" id="to-do-column">
