@@ -88,15 +88,15 @@
                             <form id="addProjectForm" method="post" action="AddProjectServlet">
                                 <div class="form-group">
                                     <label for="projectName">Project Name</label>
-                                    <input type="text" class="form-control" id="projectName" name="projectName" required>
+                                    <input type="text" class="form-control" id="projectName" name="project_name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="startDate">Start Date</label>
-                                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                    <input type="date" class="form-control" id="startDate" name="start_date" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="endDate">End Date</label>
-                                    <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                    <input type="date" class="form-control" id="endDate" name="end_date" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
@@ -106,18 +106,18 @@
                                     <label for="budget">Budget</label>
                                     <input type="number" class="form-control" id="budget" name="budget" required>
                                 </div>
-
-
-                    <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Add Project</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Add Project</button>
+                                </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
+            </div>
+            <!-- Add Project Modal End -->
 
-            </div>
-            </div>
+
 
             <%
                 List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
@@ -126,7 +126,6 @@
                     for (projects projet : projectList) {
 
             %>
-            <!-- Add A Project Modal End -->
 
 
             <!-- Editing Modal -->

@@ -32,5 +32,15 @@
         <url-pattern>/EditProject</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddProjectServlet</servlet-name>
+        <servlet-class>org.example.constructionxpert.AddProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddProjectServlet</servlet-name>
+        <url-pattern>/AddProjectServlet</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>
