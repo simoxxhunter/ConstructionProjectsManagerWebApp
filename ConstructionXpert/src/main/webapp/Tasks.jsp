@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="model.projects" %>
+<%@ page import="model.tasks" %>
+<%@ page import="Dao.ImpAddTasks" %>
+<%@ page import="java.util.List" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -156,51 +161,52 @@
 
 
 
- <!-- add a task modal start-->
- <div class="modal fade " id="AddTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+ <!-- Add Task Modal -->
+ <div class="modal fade" id="AddTaskModal" tabindex="-1" role="dialog" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="AddTaskModalLabel">Edit Task</h5>
+                 <h5 class="modal-title" id="AddTaskModalLabel">Add Task</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
              <div class="modal-body">
-                 <form id="AddTaskForm">
+                 <form id="AddTaskForm" action="AddTaskServlet" method="post">
                      <div class="form-group">
                          <label for="AddTaskName">Task Name</label>
-                         <input type="text" class="form-control form-control-outline" id="AddTaskName">
+                         <input type="text" class="form-control" id="AddTaskName" name="description">
                      </div>
                      <div class="form-group">
-                         <label for="editTaskDescription">Task Description</label>
-                         <textarea class="form-control form-control-outline" id="AddTaskDescription" rows="3"></textarea>
+                         <label for="AddTaskDescription">Task Description</label>
+                         <textarea class="form-control" id="AddTaskDescription" rows="3" name="description"></textarea>
                      </div>
                      <div class="form-group">
-                         <label for="editStartDate">Start Date</label>
-                         <input type="date" class="form-control form-control-outline" id="AddStartDate">
+                         <label for="AddStartDate">Start Date</label>
+                         <input type="date" class="form-control" id="AddStartDate" name="start_date">
                      </div>
                      <div class="form-group">
-                         <label for="editEndDate">End Date</label>
-                         <input type="date" class="form-control form-control-outline" id="AddEndDate">
+                         <label for="AddEndDate">End Date</label>
+                         <input type="date" class="form-control" id="AddEndDate" name="end_date">
                      </div>
                      <div class="form-group">
-                         <label for="editStatus">Status</label>
-                         <select class="form-control form-control-outline" id="AddStatus">
+                         <label for="AddStatus">Status</label>
+                         <select class="form-control" id="AddStatus" name="status">
                              <option value="To Do">To Do</option>
                              <option value="Doing">Doing</option>
                              <option value="Done">Done</option>
                          </select>
                      </div>
                      <div class="form-group">
-                         <label for="editRequiredResources">Required Resources</label>
-                         <textarea class="form-control form-control-outline" id="AddRequiredResources" rows="3"></textarea>
+                         <label for="AddResourceId">Resource ID</label>
+                         <input type="number" class="form-control" id="AddResourceId" name="resource_id">
                      </div>
+                     <div class="form-group">
+                         <label for="AddProjectId">Project ID</label>
+                         <input type="number" class="form-control" id="AddProjectId" name="project_id">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Save changes</button>
                  </form>
-             </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                 <button type="button" class="btn btn-primary">Save changes</button>
              </div>
          </div>
      </div>
@@ -252,8 +258,26 @@
     <main id="content" class="p-4 p-md-5 pt-5">
         <div class="container">
             <div class="mb-4">
-                <button class="btn btn-outline-primary mr-2">Project 1</button>
-                <button class="btn btn-outline-primary mr-2">Project 2</button>
+                <%
+                    List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
+                    projectList.sort((I1, I2) -> Integer.compare(I1.getProject_id(), I2.getProject_id()));
+                    if (projectList != null && !projectList.isEmpty()) {
+                        for (projects projet : projectList) {
+
+                %>
+                <button class="btn btn-outline-primary mr-2"> <%= projet.getProject_name() %></button>
+
+                <%
+                    }
+                } else {
+                %>
+                <div class="text-center">
+                    <h2>No projects available</h2>
+                </div>
+                <%
+                    }
+                %>
+
             </div>
 
             <h2 class="mb-4" id="project-title">Project Name</h2>
@@ -280,9 +304,17 @@
                                 <h5 class="kanban-card-title card-title">gfhghgf</h5>
                                 <p class="kanban-card-text card-text">gfhfgh</p>
                                 <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTaskModal">
-                                    Edit
-                                </button>
+                                <div class="d-flex " style="justify-content: space-evenly;">
+                                    <button type="button" class="btn text-white px-5 py-3 main-btn mr-2" data-toggle="modal" data-target="#editTaskModal"
+                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: #17a2b8">
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn text-white px-5 py-3 main-btn" data-toggle="modal" data-target="#editTaskModal"
+                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: red">
+                                        Delete
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
 

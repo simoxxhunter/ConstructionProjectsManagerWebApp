@@ -41,6 +41,15 @@
         <url-pattern>/AddProjectServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>org.example.constructionxpert.AddTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <url-pattern>/AddTaskServlet</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
