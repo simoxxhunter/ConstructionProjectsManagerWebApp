@@ -16,7 +16,7 @@
 <body>
 
 <div class="wrapper d-flex align-items-stretch">
-  <nav id="sidebar">
+  <nav id="sidebar" aria-label="Main Navigation">
     <div class="custom-menu">
       <button type="button" id="sidebarCollapse" class="btn btn-primary">
         <i class="fa fa-bars"></i>
@@ -24,38 +24,34 @@
       </button>
     </div>
     <div class="p-4">
-      <h1><a href="Dashboard.html" class="logo"> <img src="images/logo-nobackground.png" alt="logo" width="150"
-                                                  height="140"></a></h1>
+      <h1><a href="Dashboard.jsp" class="logo">
+        <img src="images/logo-nobackground.png" alt="Company Logo" width="150" height="140"></a></h1>
       <ul class="list-unstyled components mb-5">
         <li class="active">
-          <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
+          <a href="Dashboard.jsp"><span class="fa fa-home mr-3"></span> Dashboard</a>
         </li>
         <li>
-          <a href="Projects.html"><span class="fa fa-briefcase mr-3"></span> Projects</a>
+          <a href="ProjectsServlet"><span class="fa fa-briefcase mr-3"></span> Projects</a>
         </li>
         <li>
-          <a href="#"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
+          <a href="AddTaskServlet"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
         </li>
         <li>
-          <a href="#"><span class="fa fa-cogs mr-3"></span>Resources</a>
+          <a href="#"><span class="fa fa-cogs mr-3"></span> Resources</a>
         </li>
         <li>
-          <a href="#"><span class="fa fa-sign-out mr-3"></span>Sign-out</a>
+          <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign-out</a>
         </li>
       </ul>
-      <div class="footer">
-        <p>
-          Copyright &copy;
-          <script>document.write(new Date().getFullYear());</script> <br> ConstructionXpert Services <i
-                class="icon-heart" aria-hidden="true"></i>
-      </div>
+      <footer class="footer mt-5">
+        <p>&copy;
+          <script>document.write(new Date().getFullYear());</script> ConstructionXpert Services. <i
+                  class="fa fa-heart" aria-hidden="true"></i>
+        </p>
+      </footer>
     </div>
   </nav>
 
-  <div id="content" class="p-4 p-md-5 pt-5">
-
-  </div>
-</div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/popper.js"></script>

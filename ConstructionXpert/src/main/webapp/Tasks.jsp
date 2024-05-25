@@ -227,17 +227,17 @@
             </button>
         </div>
         <div class="p-4">
-            <h1><a href="index.html" class="logo">
+            <h1><a href="Dashboard.jsp" class="logo">
                 <img src="images/logo-nobackground.png" alt="Company Logo" width="150" height="140"></a></h1>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="Dashboard.html"><span class="fa fa-home mr-3"></span> Dashboard</a>
+                    <a href="Dashboard.jsp"><span class="fa fa-home mr-3"></span> Dashboard</a>
                 </li>
                 <li>
-                    <a href="Projects.html"><span class="fa fa-briefcase mr-3"></span> Projects</a>
+                    <a href="ProjectsServlet"><span class="fa fa-briefcase mr-3"></span> Projects</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
+                    <a href="AddTaskServlet"><span class="fa fa-sticky-note mr-3"></span> Tasks</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-cogs mr-3"></span> Resources</a>
