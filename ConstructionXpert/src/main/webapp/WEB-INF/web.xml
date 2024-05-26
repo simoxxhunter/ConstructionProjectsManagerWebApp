@@ -50,6 +50,15 @@
         <url-pattern>/AddTaskServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ShowTasksServlet</servlet-name>
+        <servlet-class>org.example.constructionxpert.ShowTasksServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowTasksServlet</servlet-name>
+        <url-pattern>/ShowTasksServlet</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

@@ -33,7 +33,7 @@ public class EditProjectServlet extends HttpServlet {
 
         try {
             projEdit.editProject(project);
-            request.setAttribute("showP", showProj.getAvailableProjects());
+            request.setAttribute("showProj", showProj.getAvailableProjects());
         } catch (SQLException e) {
             throw new RuntimeException("Error editing project", e);
         }
