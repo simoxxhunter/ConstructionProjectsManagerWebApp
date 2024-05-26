@@ -257,6 +257,7 @@
 
     <main id="content" class="p-4 p-md-5 pt-5">
         <div class="container">
+
             <div class="mb-4">
                 <%
                     List<projects> projectList = (List<projects>) request.getAttribute("showProjects");
@@ -265,7 +266,20 @@
                         for (projects projet : projectList) {
 
                 %>
-                <button class="btn btn-outline-primary mr-2"> <%= projet.getProject_name() %></button>
+                <button class="btn btn-outline-primary mr-2" >
+                    <input type="hidden" name="id_Proj" value="<%= request.getParameter("project_id") %>">
+                    <a href="AddTaskServlet?project_id=<%= projet.getProject_id() %>">
+                            <%= projet.getProject_id() %>  ; <%= projet.getProject_name() %>
+                </a></button>
+
+                <h2 class="mb-4" id="project-title"> fgfgr</h2>
+                <div id="project-description" class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"> Project Title : <%= projet.getProject_name() %></h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+                            lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+                    </div>
+                </div>
 
                 <%
                     }
@@ -278,16 +292,10 @@
                     }
                 %>
 
+
             </div>
 
-            <h2 class="mb-4" id="project-title">Project Name</h2>
-            <div id="project-description" class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Project Description</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
-                        lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                </div>
-            </div>
+
 
             <h3 class="mt-5 mb-4">Tasks</h3>
 
