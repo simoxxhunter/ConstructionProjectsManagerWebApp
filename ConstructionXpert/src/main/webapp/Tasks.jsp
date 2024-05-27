@@ -118,7 +118,16 @@
         .add-task-btn {
             margin-bottom: 10px;
         }
+        .project-buttons-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .project-buttons-wrapper {
+            display: inline-block;
+        }
     </style>
+
 </head>
 
 
@@ -235,6 +244,10 @@
 <!--- add task modal end  --->
 
 
+
+
+
+
 <div class="wrapper d-flex align-items-stretch">
     <nav id="sidebar" aria-label="Main Navigation">
         <div class="custom-menu">
@@ -274,141 +287,148 @@
     </nav>
 
     <main id="content" class="p-4 p-md-5 pt-5">
-
-
-        <div class="container">
-            <div class="mb-4">
-                <%
-                    ImpProjects proj = new ImpProjects();
-                    List<projects> projectList = null;
-                    try {
-                        projectList = proj.getAvailableProjects();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (projectList != null && !projectList.isEmpty()) {
-                        projectList.sort((I1, I2) -> Integer.compare(I1.getProject_id(), I2.getProject_id()));
-                %>
-                <div class="btn-group">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 mb-4">
                     <%
+                        ImpProjects proj = new ImpProjects();
+                        List<projects> projectList = null;
+                        try {
+                            projectList = proj.getAvailableProjects();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (projectList != null && !projectList.isEmpty()) {
+                            projectList.sort((I1, I2) -> Integer.compare(I1.getProject_id(), I2.getProject_id()));
+                    %>
+                    <div class="project-buttons-container">
+                        <div class="project-buttons-wrapper">
+                            <%
+                                for (projects projet : projectList) {
+                            %>
+                            <button class="btn btn-outline-primary mr-2">
+                                <a href="AddTaskServlet?project_id=<%= projet.getProject_id() %>">
+                                    <%= projet.getProject_id() %> ; <%= projet.getProject_name() %>
+                                </a>
+                            </button>
+                            <%
+                                }
+                            %>
+                        </div>
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <div class="text-center">
+                        <h2>No projects available</h2>
+                    </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+            <div class="row">
+                <%
+                    String selectedProjectId = request.getParameter("project_id");
+                    if (selectedProjectId != null) {
+                        projects selectedProject = null;
                         for (projects projet : projectList) {
-                    %>
-                    <button class="btn btn-outline-primary mr-2">
-                        <a href="AddTaskServlet?project_id=<%= projet.getProject_id() %>">
-                            <%= projet.getProject_id() %> ; <%= projet.getProject_name() %>
-                        </a>
-                    </button>
-                    <%
+                            if (projet.getProject_id() == Integer.parseInt(selectedProjectId)) {
+                                selectedProject = projet;
+                                break;
+                            }
                         }
-                    %>
-                </div>
-                <%
-                } else {
+                        if (selectedProject != null) {
                 %>
-                <div class="text-center">
-                    <h2>No projects available</h2>
+                <div class="col-12">
+                    <h2 class="mb-4" id="project-title">Project Number : <%= selectedProject.getProject_id() %></h2>
+                    <div id="project-description" class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Title : <%= selectedProject.getProject_name() %></h5>
+                            <p class="card-text"><%= selectedProject.getDescription() %></p>
+                        </div>
+                    </div>
                 </div>
                 <%
+                        }
                     }
                 %>
             </div>
 
-            <%
-                String selectedProjectId = request.getParameter("project_id");
-                if (selectedProjectId != null) {
-                    projects selectedProject = null;
-                    for (projects projet : projectList) {
-                        if (projet.getProject_id() == Integer.parseInt(selectedProjectId)) {
-                            selectedProject = projet;
-                            break;
-                        }
-                    }
-                    if (selectedProject != null) {
-            %>
-            <h2 class="mb-4" id="project-title">Project Number :  <%= selectedProject.getProject_id() %>
-            </h2>
-            <div id="project-description" class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Project Title : <%= selectedProject.getProject_name() %>
-                    </h5>
-                    <p class="card-text"><%= selectedProject.getDescription() %>
-                    </p>
-                </div>
-            </div>
-            <%
-                    }
-                }
-            %>
-        </div>
+            <h3 class="mt-5 mb-4">Tasks</h3>
 
+            <button class="btn btn-success mb-3" style="border-radius: 30px;color: #fff !important; " data-toggle="modal"
+                    data-target="#AddTaskModal">Add Task
+            </button>
 
-        <h3 class="mt-5 mb-4">Tasks</h3>
+            <div id="kanban-board" class="kanban-board">
+                <div class="kanban-column" id="to-do-column">
+                    <div class="kanban-column-header">To Do</div>
 
-        <button class="btn btn-success" style="border-radius: 30px;color: #fff !important; " data-toggle="modal"
-                data-target="#AddTaskModal">Add Task
-        </button>
+                    <div class="kanban-column-body " id="to-do-tasks">
 
-        <div id="kanban-board" class="kanban-board">
+                        <div class="kanban-card card to-do">
+                            <div class="kanban-card-body card-body">
+                                <h5 class="kanban-card-title card-title">gfhghgf</h5>
+                                <p class="kanban-card-text card-text">gfhfgh</p>
+                                <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
+                                <div class="d-flex " style="justify-content: space-evenly;">
+                                    <button type="button" class="btn text-white px-5 py-3 main-btn mr-2" data-toggle="modal"
+                                            data-target="#editTaskModal"
+                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: #17a2b8">
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn text-white px-5 py-3 main-btn" data-toggle="modal"
+                                            data-target="#editTaskModal"
+                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: red">
+                                        Delete
+                                    </button>
+                                </div>
 
-            <div class="kanban-column" id="to-do-column">
-                <div class="kanban-column-header">To Do</div>
-
-                <div class="kanban-column-body " id="to-do-tasks">
-
-                    <div class="kanban-card card to-do">
-                        <div class="kanban-card-body card-body">
-                            <h5 class="kanban-card-title card-title">gfhghgf</h5>
-                            <p class="kanban-card-text card-text">gfhfgh</p>
-                            <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
-                            <div class="d-flex " style="justify-content: space-evenly;">
-                                <button type="button" class="btn text-white px-5 py-3 main-btn mr-2" data-toggle="modal"
-                                        data-target="#editTaskModal"
-                                        style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: #17a2b8">
-                                    Edit
-                                </button>
-                                <button type="button" class="btn text-white px-5 py-3 main-btn" data-toggle="modal"
-                                        data-target="#editTaskModal"
-                                        style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: red">
-                                    Delete
-                                </button>
                             </div>
-
                         </div>
-                    </div>
 
 
-                    <div class="kanban-card card to-do">
-                        <div class="kanban-card-body card-body">
-                            <h5 class="kanban-card-title card-title">gfhghgf</h5>
-                            <p class="kanban-card-text card-text">gfhfgh</p>
-                            <p class="kanban-card-meta card-text"><small class="text-muted">Assigned to: </small></p>
-                            <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
-                            <select class="kanban-card-select form-control form-control-sm mt-2">
-                                <option value="To Do">To Do</option>
-                                <option value="Doing">Doing</option>
-                                <option value="Done">Done</option>
-                            </select>
+                        <div class="kanban-card card to-do">
+                            <div class="kanban-card-body card-body">
+                                <h5 class="kanban-card-title card-title">gfhghgf</h5>
+                                <p class="kanban-card-text card-text">gfhfgh</p>
+                                <p class="kanban-card-meta card-text"><small class="text-muted">Assigned to: </small></p>
+                                <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
+                                <select class="kanban-card-select form-control form-control-sm mt-2">
+                                    <option value="To Do">To Do</option>
+                                    <option value="Doing">Doing</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
+
+                    </div>
 
                 </div>
 
-            </div>
 
+                <div class="kanban-column" id="doing-column">
+                    <div class="kanban-column-header">Doing</div>
+                    <div class="kanban-column-body" id="doing-tasks"></div>
+                </div>
+                <div class="kanban-column" id="done-column">
+                    <div class="kanban-column-header">Done</div>
+                    <div class="kanban-column-body" id="done-tasks"></div>
+                </div>
 
-            <div class="kanban-column" id="doing-column">
-                <div class="kanban-column-header">Doing</div>
-                <div class="kanban-column-body" id="doing-tasks"></div>
-            </div>
-            <div class="kanban-column" id="done-column">
-                <div class="kanban-column-header">Done</div>
-                <div class="kanban-column-body" id="done-tasks"></div>
             </div>
         </div>
+    </main>
 
-</main>
+
+
+
+
+
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -420,6 +440,4 @@
 
 </body>
 </html>
-
-
 
