@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.tasks;
-import model.projects;
-
 
 public class ImpShowTasks {
 
-    public List<tasks> getAvailableTasks() throws SQLException {
+    public List<tasks> getAvailableTasks(int ID) throws SQLException {
         List<tasks> TasksList = new ArrayList<>();
-        String showTasksQuery = "SELECT * FROM tasks where project_id=?";
+
+        String showTasksQuery = "SELECT * FROM tasks WHERE project_id = ?";
 
         Connection conn = connection.getConnection();
         PreparedStatement statement = conn.prepareStatement(showTasksQuery);
+        statement.setInt(1, ID);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
@@ -29,9 +29,8 @@ public class ImpShowTasks {
             int resource_id = resultSet.getInt("resource_id");
             int project_id = resultSet.getInt("project_id");
 
-
-            tasks tasks = new tasks(task_id, description, start_date, end_date, status, resource_id,project_id);
-            TasksList.add(tasks);
+            tasks task = new tasks(task_id, description, start_date, end_date, status, resource_id, project_id);
+            TasksList.add(task);
         }
         conn.close();
 

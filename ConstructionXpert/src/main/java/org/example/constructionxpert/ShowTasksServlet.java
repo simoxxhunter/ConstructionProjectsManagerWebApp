@@ -7,31 +7,38 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.tasks;
-import model.projects;
-import Dao.ImpProjects;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 
 @WebServlet(name = "tasks", value = "/Tasks")
 public class ShowTasksServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ImpShowTasks tasks = new ImpShowTasks();
+        ImpShowTasks taskDao = new ImpShowTasks();
+        String projectIdParam = request.getParameter("project_id");
 
-        try {
-            request.setAttribute("showTasks", tasks.getAvailableTasks());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (projectIdParam != null) {
+            int projectId = Integer.parseInt(projectIdParam);
+            try {
+                List<tasks> taskList = taskDao.getAvailableTasks(projectId);
+                request.setAttribute("taskList", taskList);
+
+                System.out.println("Project ID: " + projectId);
+                System.out.println("Tasks Retrieved: " + taskList.size());
+                for (tasks task : taskList) {
+                    System.out.println(task);
+                }
+
+            } catch (SQLException e) {
+                throw new ServletException("Cannot retrieve tasks", e);
+            }
         }
         this.getServletContext().getRequestDispatcher("/Tasks.jsp").forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        doGet(request, response);
     }
-
 }

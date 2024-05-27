@@ -11,6 +11,7 @@
 <%@ page import="model.tasks" %>
 <%@ page import="Dao.ImpAddTasks" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Dao.ImpShowTasks" %>
 
 <%@ page import="java.util.List, model.projects, Dao.ImpProjects, Dao.ImpShowTasks, model.tasks" %>
 <%@ page import="java.sql.SQLException" %>
@@ -118,6 +119,7 @@
         .add-task-btn {
             margin-bottom: 10px;
         }
+
         .project-buttons-container {
             overflow-x: auto;
             white-space: nowrap;
@@ -232,7 +234,7 @@
                     </div>
                     <div class="form-group">
                         <label for="AddProjectId">Project ID</label>
-                        <input type="number" class="form-control" id="AddProjectId" name="project_id">
+                        <input type="number" class="form-control" id="AddProjectId" name="project_id" readonly>
                     </div>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
@@ -242,10 +244,6 @@
 </div>
 
 <!--- add task modal end  --->
-
-
-
-
 
 
 <div class="wrapper d-flex align-items-stretch">
@@ -285,6 +283,7 @@
             </footer>
         </div>
     </nav>
+
 
     <main id="content" class="p-4 p-md-5 pt-5">
         <div class="container-fluid">
@@ -342,11 +341,14 @@
                         if (selectedProject != null) {
                 %>
                 <div class="col-12">
-                    <h2 class="mb-4" id="project-title">Project Number : <%= selectedProject.getProject_id() %></h2>
+                    <h2 class="mb-4" id="project-title">Project Number : <%= selectedProject.getProject_id() %>
+                    </h2>
                     <div id="project-description" class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">Project Title : <%= selectedProject.getProject_name() %></h5>
-                            <p class="card-text"><%= selectedProject.getDescription() %></p>
+                            <h5 class="card-title">Project Title : <%= selectedProject.getProject_name() %>
+                            </h5>
+                            <p class="card-text"><%= selectedProject.getDescription() %>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -358,57 +360,62 @@
 
             <h3 class="mt-5 mb-4">Tasks</h3>
 
-            <button class="btn btn-success mb-3" style="border-radius: 30px;color: #fff !important; " data-toggle="modal"
+            <button class="btn btn-success mb-3" style="border-radius: 30px;color: #fff !important; "
+                    data-toggle="modal"
                     data-target="#AddTaskModal">Add Task
             </button>
+
+
+            <%
+                String selectedProjectIds = request.getParameter("project_id");
+                List<tasks> taskList = (List<tasks>) request.getAttribute("taskList");
+
+                // Debugging output
+                if (taskList != null) {
+                    System.out.println("Tasks List Size: " + taskList.size());
+                } else {
+                    System.out.println("No tasks found.");
+                }
+            %>
+
+            <h3 class="mt-5 mb-4">Tasks</h3>
+            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
 
             <div id="kanban-board" class="kanban-board">
                 <div class="kanban-column" id="to-do-column">
                     <div class="kanban-column-header">To Do</div>
-
-                    <div class="kanban-column-body " id="to-do-tasks">
-
+                    <div class="kanban-column-body" id="to-do-tasks">
+                        <% if (taskList != null && !taskList.isEmpty()) { %>
+                        <% for (tasks task : taskList) { %>
                         <div class="kanban-card card to-do">
                             <div class="kanban-card-body card-body">
-                                <h5 class="kanban-card-title card-title">gfhghgf</h5>
-                                <p class="kanban-card-text card-text">gfhfgh</p>
-                                <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
-                                <div class="d-flex " style="justify-content: space-evenly;">
-                                    <button type="button" class="btn text-white px-5 py-3 main-btn mr-2" data-toggle="modal"
-                                            data-target="#editTaskModal"
-                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: #17a2b8">
-                                        Edit
+                                <h5 class="kanban-card-title card-title"><%= task.getDescription() %>
+                                </h5>
+                                <p class="kanban-card-text card-text">Start: <%= task.getStart_date() %>
+                                </p>
+                                <p class="kanban-card-text card-text">End: <%= task.getEnd_date() %>
+                                </p>
+                                <p class="kanban-card-meta card-text"><small
+                                        class="text-muted">Status: <%= task.getStatus() %>
+                                </small></p>
+                                <div class="d-flex" style="justify-content: space-evenly;">
+                                    <button type="button" class="btn text-white px-5 py-3 main-btn mr-2"
+                                            data-toggle="modal" data-target="#editTaskModal"
+                                            data-task-id="<%= task.getTask_id() %>">Edit
                                     </button>
                                     <button type="button" class="btn text-white px-5 py-3 main-btn" data-toggle="modal"
-                                            data-target="#editTaskModal"
-                                            style="display: flex; align-items: center; justify-content: center; height: 35px; width: 110px; background-color: red">
+                                            data-target="#deleteTaskModal" data-task-id="<%= task.getTask_id() %>">
                                         Delete
                                     </button>
                                 </div>
-
                             </div>
                         </div>
-
-
-                        <div class="kanban-card card to-do">
-                            <div class="kanban-card-body card-body">
-                                <h5 class="kanban-card-title card-title">gfhghgf</h5>
-                                <p class="kanban-card-text card-text">gfhfgh</p>
-                                <p class="kanban-card-meta card-text"><small class="text-muted">Assigned to: </small></p>
-                                <p class="kanban-card-meta card-text"><small class="text-muted">Due: </small></p>
-                                <select class="kanban-card-select form-control form-control-sm mt-2">
-                                    <option value="To Do">To Do</option>
-                                    <option value="Doing">Doing</option>
-                                    <option value="Done">Done</option>
-                                </select>
-                            </div>
-                        </div>
-
-
+                        <% } %>
+                        <% } else { %>
+                        <p>No tasks available for this project.</p>
+                        <% } %>
                     </div>
-
                 </div>
-
 
                 <div class="kanban-column" id="doing-column">
                     <div class="kanban-column-header">Doing</div>
@@ -418,15 +425,11 @@
                     <div class="kanban-column-header">Done</div>
                     <div class="kanban-column-body" id="done-tasks"></div>
                 </div>
-
             </div>
         </div>
-    </main>
 
 
-
-
-
+</main>
 
 
 </div>

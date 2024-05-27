@@ -11,9 +11,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.tasks;
-import model.projects;
-import java.util.List;
-
 
 @WebServlet(name = "AddTaskServlet", value = "/AddTaskServlet")
 public class AddTaskServlet extends HttpServlet {
@@ -23,8 +20,7 @@ public class AddTaskServlet extends HttpServlet {
         ImpProjects proj = new ImpProjects();
 
         try {
-            List<projects> availableProjects = proj.getAvailableProjects();
-            request.setAttribute("showProjects", availableProjects);
+            request.setAttribute("showProjects", proj.getAvailableProjects());
             this.getServletContext().getRequestDispatcher("/Tasks.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,4 +49,3 @@ public class AddTaskServlet extends HttpServlet {
         }
     }
 }
-
