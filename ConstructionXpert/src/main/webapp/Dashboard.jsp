@@ -55,14 +55,11 @@
       </button>
     </div>
     <div class="p-4">
-      <h1><a href="index.jsp" class="logo">
+      <h1><a href="Dashboard.jsp" class="logo">
         <img src="images/logo-nobackground.png" alt="Company Logo" width="150" height="140"></a></h1>
       <ul class="list-unstyled components mb-5">
-        <li>
-          <a href="index.jsp"><span class="fa fa-home mr-3"></span> Home</a>
-        </li>
-        <li>
-          <a href="Dashboard.jsp"><span class="fa fa-tachometer mr-3"></span> Dashboard</a>
+        <li class="active">
+          <a href="Dashboard.jsp"><span class="fa fa-home mr-3"></span> Dashboard</a>
         </li>
         <li>
           <a href="ProjectsServlet"><span class="fa fa-briefcase mr-3"></span> Projects</a>
@@ -79,7 +76,8 @@
       </ul>
       <footer class="footer mt-5">
         <p>&copy;
-          <script>document.write(new Date().getFullYear());</script> ConstructionXpert Services. <i
+          <script>document.write(new Date().getFullYear());</script>
+          ConstructionXpert Services. <i
                   class="fa fa-heart" aria-hidden="true"></i>
         </p>
       </footer>
