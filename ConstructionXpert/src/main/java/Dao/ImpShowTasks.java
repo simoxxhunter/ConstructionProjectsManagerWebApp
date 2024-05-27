@@ -11,6 +11,7 @@ import model.projects;
 
 
 public class ImpShowTasks {
+
     public List<tasks> getAvailableTasks() throws SQLException {
         List<tasks> TasksList = new ArrayList<>();
         String showTasksQuery = "SELECT * FROM tasks where project_id=?";
