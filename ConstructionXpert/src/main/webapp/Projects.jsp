@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-success">Add Project</button>
+                                    <button type="button" class="btn btn-success" onclick="return VerifyDate();">Add Project</button>
                                 </div>
                             </form>
                         </div>
@@ -316,6 +316,19 @@
         if (confirm("Do you really want to save these changes?")) {
             document.getElementById('editForm' + projectId).submit();
         }
+    }
+
+    function VerifyDate() {
+        var startDate = document.getElementById('startDate').value;
+        var endDate = document.getElementById('endDate').value;
+
+        if (new Date(endDate) <= new Date(startDate)) {
+            alert("End Date Should Be Greater than Start Date");
+            return false;
+        }
+
+        document.getElementById('addProjectForm').submit();
+        return true;
     }
 </script>
 
