@@ -378,9 +378,6 @@
                 }
             %>
 
-            <h3 class="mt-5 mb-4">Tasks</h3>
-            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#AddTaskModal">Add Task</button>
-
             <div id="kanban-board" class="kanban-board">
                 <div class="kanban-column" id="to-do-column">
                     <div class="kanban-column-header">To Do</div>
